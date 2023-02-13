@@ -1,2 +1,6 @@
 #!/bin/bash
+<<<<<<< HEAD
 find . -type d ! -path . | wc -1
+=======
+find . -type d ! -path . | wc -l
+>>>>>>> 8739b1f35bc58936819af0a1617317c4e4789c42
