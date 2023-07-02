@@ -2,6 +2,4 @@
 # This script groups visitors by IP and
 # HTTP status code from Apache log files and displays the data
 
-awk '{ count[$1" "$9]++ }
-     END { for (key in count) print count[key],
-     key }' apache-access.log | sort -nr
+awk -F' ' '{ print $1, $9 }' apache-access.log | sort | uniq -c | sort -rn
