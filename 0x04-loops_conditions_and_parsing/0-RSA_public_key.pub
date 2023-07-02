@@ -1,1 +1,5 @@
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbt2bcTgYyNEAqv5WEm0O51rCmJrCRiwwZu4mAv2AdUDHRdkIr6h2MjC1ugzu60myOuC4Y alan tiren@ALANTIREN
+#!/usr/bin/env bash
+# a RSA key pair.
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbt2bcTgYyNEAqv5WEm0O51rCmJrCRiwwZu4mAv2Ad
+UDHRdkIr6h2MjC1ugzu60myOuC4Y alan tiren@ALANTIREN
