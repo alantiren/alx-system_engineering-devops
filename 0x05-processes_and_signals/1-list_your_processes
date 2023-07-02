@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-# This script displays a list of currently running processes
+# This script displays a list of currently running processes.
+# Using the ps command with the options to show all processes,
+# including those without a TTY,
+# and formatting the output to display in a user-oriented format.
 
-ps -ef --forest
+ps aux --forest
