@@ -3,9 +3,9 @@
 # Extract the argument passed to the script
 string = ARGV[0]
 
-# Apply the regular expression to match "hbtn" repeated zero or one time
-regex = /hb[t]?n/
-matches = string.scan(regex)
+# Apply the regular expression to match "hb" followed by zero or more occurrences of "t" and then "n"
+regex = /hbt*n/
+match = string.match(regex)
 
-# Print the matched substrings
-matches.each { |match| puts match }
+# Output the matched substring if there is a match
+puts match[0] if match
