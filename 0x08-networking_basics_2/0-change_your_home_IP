@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# This script configures the localhost and facebook.com IP addresses.
+
+# Update the /etc/hosts file to set localhost to 127.0.0.2
+sudo sed -i 's/127\.0\.0\.1\slocalhost/127.0.0.2 localhost/' /etc/hosts
+
+# Update the /etc/hosts file to set facebook.com to 8.8.8.8
+sudo sed -i 's/[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\sfacebook.com/8.8.8.8 facebook.com/' /etc/hosts
