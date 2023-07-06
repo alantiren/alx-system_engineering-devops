@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+netstat -tulnep | awk '/^tcp|^udp/ {print $1, $4, $7}' | while read -r protocol local_address pid_program; do
+    port=$(echo "$local_address" | awk -F ":" '{print $NF}')
+    program=$(basename "$(echo "$pid_program" | awk -F "/" '{print $NF}')")
+    echo "$protocol $local_address $program (PID: $pid_program)"
+done
