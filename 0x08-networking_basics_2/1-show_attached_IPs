@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Retrieve all active IPv4 addresses
+ip addr show | awk '/inet /{print $2}' | awk -F '/' '{print $1}' | grep -v "127.0.0.1"
