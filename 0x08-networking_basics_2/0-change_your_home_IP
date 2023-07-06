@@ -2,8 +2,14 @@
 
 # This script configures the localhost and facebook.com IP addresses.
 
-# Update the /etc/hosts file to set localhost to 127.0.0.2
-sudo sed -i 's/127\.0\.0\.1\slocalhost/127.0.0.2 localhost/' /etc/hosts
-
-# Update the /etc/hosts file to set facebook.com to 8.8.8.8
-sudo sed -i 's/[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\sfacebook.com/8.8.8.8 facebook.com/' /etc/hosts
+# Check if the script is running in Docker
+if [ -f "/.dockerenv" ]; then
+  # Update the /etc/hosts file to set localhost to 127.0.0.2
+  echo "127.0.0.2 localhost" | sudo tee /etc/hosts >/dev/null
+  
+  # Update the /etc/hosts file to set facebook.com to 8.8.8.8
+  echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts >/dev/null
+else
+  echo "This script is intended to be run within a Docker container."
+  echo "Please refer to the README.md file for instructions."
+fi
