@@ -1,7 +1,64 @@
 #!/usr/bin/env bash
+# This script displays the listening ports and their corresponding PID and program name.
 
-netstat -tulnep | awk '/^tcp|^udp/ {print $1, $4, $7}' | while read -r protocol local_address pid_program; do
-    port=$(echo "$local_address" | awk -F ":" '{print $NF}')
-    program=$(basename "$(echo "$pid_program" | awk -F "/" '{print $NF}')")
-    echo "$protocol $local_address $program (PID: $pid_program)"
-done
+# Print the header for active internet connections
+echo "Active Internet connections (only servers)"
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+
+# Get the listening TCP sockets using netstat
+tcp_sockets=$(netstat -tnl | awk '$6 == "LISTEN"')
+
+# Loop through each TCP socket
+while IFS= read -r line; do
+    # Extract the protocol, local address, and PID
+    protocol="tcp"
+    local_address=$(echo "$line" | awk '{print $4}')
+    pid=$(echo "$line" | awk '{print $NF}' | awk -F'/' '{print $1}')
+
+    # Get the program name corresponding to the PID
+    program_name=$(ps -p "$pid" -o comm=)
+
+    # Print the socket details
+    echo "$protocol        0      0 $local_address         *:*                     LISTEN      $pid/$program_name"
+done <<< "$tcp_sockets"
+
+# Get the listening UDP sockets using netstat
+udp_sockets=$(netstat -unl | awk '$6 == "LISTEN"')
+
+# Loop through each UDP socket
+while IFS= read -r line; do
+    # Extract the protocol, local address, and PID
+    protocol="udp"
+    local_address=$(echo "$line" | awk '{print $4}')
+    pid=$(echo "$line" | awk '{print $NF}' | awk -F'/' '{print $1}')
+
+    # Get the program name corresponding to the PID
+    program_name=$(ps -p "$pid" -o comm=)
+
+    # Print the socket details
+    echo "$protocol        0      0 $local_address         *:*                                 $pid/$program_name"
+done <<< "$udp_sockets"
+
+# Print an empty line
+echo
+
+# Print the header for UNIX domain sockets
+echo "Active UNIX domain sockets (only servers)"
+echo "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path"
+
+# Get the listening UNIX domain sockets using netstat
+unix_sockets=$(netstat -lx | awk '$6 == "LISTEN"')
+
+# Loop through each UNIX domain socket
+while IFS= read -r line; do
+    # Extract the protocol, type, and PID
+    protocol=$(echo "$line" | awk '{print $1}')
+    socket_type=$(echo "$line" | awk '{print $2}')
+    pid=$(echo "$line" | awk '{print $NF}' | awk -F'/' '{print $1}')
+
+    # Get the program name corresponding to the PID
+    program_name=$(ps -p "$pid" -o comm=)
+
+    # Print the socket details
+    echo "$line $pid/$program_name"
+done <<< "$unix_sockets"
