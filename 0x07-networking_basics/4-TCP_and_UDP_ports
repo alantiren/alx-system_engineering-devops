@@ -5,13 +5,13 @@
 echo "Active Internet connections (only servers)"
 echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
 
-# Get the listening TCP sockets using netstat
-tcp_sockets=$(netstat -tnl | awk '$6 == "LISTEN"')
+# Get the listening TCP sockets using ss
+tcp_sockets=$(ss -tln | awk 'NR>1 && $1 ~ /^(tcp|tcp6)$/ {print}')
 
 # Loop through each TCP socket
 while IFS= read -r line; do
     # Extract the protocol, local address, and PID
-    protocol="tcp"
+    protocol=$(echo "$line" | awk '{print $1}')
     local_address=$(echo "$line" | awk '{print $4}')
     pid=$(echo "$line" | awk '{print $NF}' | awk -F'/' '{print $1}')
 
@@ -22,13 +22,13 @@ while IFS= read -r line; do
     echo "$protocol        0      0 $local_address         *:*                     LISTEN      $pid/$program_name"
 done <<< "$tcp_sockets"
 
-# Get the listening UDP sockets using netstat
-udp_sockets=$(netstat -unl | awk '$6 == "LISTEN"')
+# Get the listening UDP sockets using ss
+udp_sockets=$(ss -uln | awk 'NR>1 && $1 ~ /^(udp|udp6)$/ {print}')
 
 # Loop through each UDP socket
 while IFS= read -r line; do
     # Extract the protocol, local address, and PID
-    protocol="udp"
+    protocol=$(echo "$line" | awk '{print $1}')
     local_address=$(echo "$line" | awk '{print $4}')
     pid=$(echo "$line" | awk '{print $NF}' | awk -F'/' '{print $1}')
 
@@ -46,8 +46,8 @@ echo
 echo "Active UNIX domain sockets (only servers)"
 echo "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path"
 
-# Get the listening UNIX domain sockets using netstat
-unix_sockets=$(netstat -lx | awk '$6 == "LISTEN"')
+# Get the listening UNIX domain sockets using ss
+unix_sockets=$(ss -xln | awk 'NR>1 {print}')
 
 # Loop through each UNIX domain socket
 while IFS= read -r line; do
