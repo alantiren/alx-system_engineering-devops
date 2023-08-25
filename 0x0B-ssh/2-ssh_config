@@ -3,7 +3,7 @@
 # Set correct permissions for the SSH configuration file
 # SSH Config File
 #
-Host web-01
+Host 272808-web-01
 	Hostname 107.21.30.137
 	User ubuntu
 	PasswordAuthentication no
