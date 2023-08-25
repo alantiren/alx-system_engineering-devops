@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Configure SSH client
+# Set correct permissions for the SSH configuration file
+echo -e "Host *\n\tIdentityFile ~/.ssh/school\n\tPasswordAuthentication no" > ~/.ssh/config
+chmod 600 ~/.ssh/config
+echo "SSH client configuration updated."

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Connects to the remote server using SSH and the private key
+# SSH single-character flags used:
+# -i: Specifies the identity file (private key)
+# -o: Specifies options, like disabling strict host key checking
+# -q: Quiet mode (no banner displayed)
+# Connect to the remote server using SSH and the private key
+ssh -i ~/.ssh/school -o StrictHostKeyChecking=no -q ubuntu@107.21.30.137
