@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Configure SSH client
 # Set correct permissions for the SSH configuration file
-echo -e "Host *\n\tIdentityFile ~/.ssh/school\n\tPasswordAuthentication no" > ~/.ssh/config
-chmod 600 ~/.ssh/config
-echo "SSH client configuration updated."
+# SSH Config File
+#
+Host web-01
+	Hostname 107.21.30.137
+	User ubuntu
+	PasswordAuthentication no
+	IdentityFile ~/.ssh/school
