@@ -1,13 +1,3 @@
 #!/usr/bin/env bash
 # Starting apache2 server
-
-if service apache2 status | grep -q "active (running)"; then
-    echo "Apache2 is already running."
-else
-    service apache2 start
-    if [ $? -eq 0 ]; then
-        echo "Apache2 started successfully."
-    else
-        echo "Failed to start Apache2."
-    fi
-fi
+sudo service apache2 start
