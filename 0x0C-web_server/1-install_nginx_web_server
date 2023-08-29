@@ -4,18 +4,5 @@
 # Install Nginx
 apt-get update
 apt-get -y install nginx
-
-# Configure Nginx to listen on port 80 and serve Hello World
-echo "server {
-    listen 80 default_server;
-    server_name _;
-
-    location / {
-        echo 'Hello World!';
-    }
-}" > /etc/nginx/sites-available/default
-
-# Restart Nginx
-/etc/init.d/nginx restart
-
-exit 0
+echo "Hello World!" > /var/www/html/index.html
+service nginx start
