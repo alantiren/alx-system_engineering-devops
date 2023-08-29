@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# This script configures Nginx to have a custom 404 page.
+
+# Check if root user is running the script
+if [ "$(whoami)" != "root" ]; then
+    echo "Please run this script as root."
+    exit 1
+fi
+
+# Check if Nginx is installed
+if ! command -v nginx &>/dev/null; then
+    echo "Nginx is not installed. Please install Nginx first."
+    exit 1
+fi
+
+# Backup the default site configuration
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
+
+# Configure Nginx custom 404 page
+echo "server {
+    listen 80 default_server;
+    server_name _;
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+        echo 'Ceci n\'est pas une page';
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    location / {
+        echo 'Hello World!';
+    }
+}" > /etc/nginx/sites-available/default
+
+# Restart Nginx
+/etc/init.d/nginx restart
+
+exit 0
