@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# This script installs and configures Nginx web server.
+# Install nginx web server on web-01
 
-# Install Nginx
-apt-get update
-apt-get -y install nginx
+# Update the package list and install nginx
+apt-get update -y
+apt-get install -y nginx
+
+# Create a basic HTML file with "Hello World!" content
 echo "Hello World!" > /var/www/html/index.html
-service nginx start
+
+# Restart Nginx service
+service nginx restart
+
+exit 0
