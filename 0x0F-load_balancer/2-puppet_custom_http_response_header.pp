@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Define a custom Nginx configuration for the X-Served-By header
 
 package { 'nginx':
