@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 # Configure Nginx to add a custom HTTP response header
-
 # Install Nginx
-sudo apt-get update
-sudo apt-get install nginx -y
-
 # Edit Nginx configuration
-sudo nano /etc/nginx/sites-available/default
-
 # Inside the server block, add or modify the add_header directive
 # to include the custom header
 # Example:
@@ -15,6 +9,33 @@ sudo nano /etc/nginx/sites-available/default
 #     add_header X-Served-By $hostname;
 #     # Other configurations...
 # }
-
+# Configure Nginx with custom header
 # Restart Nginx
-sudo systemctl restart nginx
+
+apt-get install -y nginx
+
+mkdir -p /var/www/html
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
+touch /var/www/html/404.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+printf %s "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /var/www/html;
+    index  index.html index.htm;
+
+    location /redirect_me {
+        return 301 https//YouTube.com/;
+    }
+
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
+}" > /etc/nginx/sites-available/default
+
+service nginx restart
