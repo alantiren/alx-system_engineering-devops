@@ -47,4 +47,3 @@ service { 'nginx':
   enable  => true,
   require => File['/etc/nginx/sites-available/default'],
 }
-
