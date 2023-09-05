@@ -1,4 +1,6 @@
+#!/usr/bin/env bash
 # Define a custom Nginx configuration for the X-Served-By header
+
 file { '/etc/nginx/sites-available/custom_header':
   ensure  => 'file',
   owner   => 'root',
