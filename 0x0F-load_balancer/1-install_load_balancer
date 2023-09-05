@@ -4,8 +4,8 @@
 # Configure HAProxy to distribute traffic using roundrobin
 # Ensure HAProxy can be managed via an init script
 # Restart HAProxy to apply the configuratio
-# Make sure the server hostnames are correctly set ([STUDENT_ID]-web-01 and [STUDENT_ID]-web-02)
-# If not, follow the provided tutorial to set them up
+# Make sure the server hostnames are correctly set ([STUDENT_ID]-web-01
+# and [STUDENT_ID]-web-02)
 # Exit with success status
 
 sudo apt-get update
@@ -23,8 +23,8 @@ backend Randommall.tech_backend
     timeout connect  3000
     timeout server  30000
     balance roundrobin
-    server 228560-web-01 54.87.655.2:80 check
-    server 228560-web-02 54.89.121.20:80 check
+    server 228560-web-01 100.26.163.195:80 check
+    server 228560-web-02 100.25.168.142:80 check
 EOT
 
 sudo systemctl enable haproxy
