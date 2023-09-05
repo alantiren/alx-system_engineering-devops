@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Configure HAProxy on lb-01 server
+
+# Update package lists and install HAProxy
+sudo apt-get update
+sudo apt-get install haproxy -y
+
+# Configure HAProxy to distribute traffic using roundrobin
+echo "
+frontend http_front
+    bind *:80
+    mode http
+    default_backend http_back
+
+backend http_back
+    mode http
+    balance roundrobin
+    server web-server1 [STUDENT_ID]-web-01:80 check
+    server web-server2 [STUDENT_ID]-web-02:80 check
+" | sudo tee /etc/haproxy/haproxy.cfg
+
+# Ensure HAProxy can be managed via an init script
+sudo systemctl enable haproxy
+
+# Restart HAProxy to apply the configuration
+sudo systemctl restart haproxy
+
+# Make sure the server hostnames are correctly set ([STUDENT_ID]-web-01 and [STUDENT_ID]-web-02)
+# If not, follow the provided tutorial to set them up
+
+# Exit with success status
+exit 0
