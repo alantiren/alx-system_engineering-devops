@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Usage: ./1-world_wide_web <domain> <subdomain>
+# Function to display information about a subdomain
+display_info() {
+    domain="$1"
+    subdomain="$2"
+    dig_result=$(dig "$subdomain.$domain" +short)
+
+    if [ -n "$dig_result" ]; then
+        record_type=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/{getline; print $4}')
+        echo "The subdomain $subdomain is a $record_type record and points to $dig_result"
+    else
+        echo "The subdomain $subdomain does not exist for $domain"
+    fi
+}
+
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 domain [subdomain]"
+    exit 1
+fi
+
+domain="$1"
+
+if [ $# -eq 1 ]; then
+    display_info "$domain" www
+    display_info "$domain" lb-01
+    display_info "$domain" web-01
+    display_info "$domain" web-02
+fi
+
+if [ $# -eq 2 ]; then
+    subdomain="$2"
+    display_info "$domain" "$subdomain"
+fi
