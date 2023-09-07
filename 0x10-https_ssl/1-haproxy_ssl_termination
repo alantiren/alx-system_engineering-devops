@@ -34,9 +34,14 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 
 frontend www-http
-    bind   0.0.0.0:80
-    reqadd X-Forwarded-Proto:\ http
-    default_backend www-backend
+    bind 0.0.0.0:80
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+    http-request redirect scheme https if !{ ssl_fc }
 
 frontend www-https
     bind 0.0.0.0:443 ssl crt /etc/letsencrypt/live/www.tiren.tech/fullchain.pem
