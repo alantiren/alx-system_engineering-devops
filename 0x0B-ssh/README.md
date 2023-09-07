@@ -29,19 +29,6 @@ By completing this project, you'll be able to:
 - Establish a secure connection to a remote host using the SSH RSA key pair.
 - Differentiate between `#!/usr/bin/env bash` and `/bin/bash` in script shebangs.
 
-## Project Timeline
-
-- Project Start: August 25, 2023, 6:00 AM
-- Project End: August 28, 2023, 6:00 AM
-- Checker Release: August 26, 2023, 12:00 AM
-- Auto Review: Before the deadline
-
-## Server Information
-
-- Server Name: 272808-web-01
-- Username: ubuntu
-- IP Address: 107.21.30.137
-- Status: Pending
 
 ## Resources
 
