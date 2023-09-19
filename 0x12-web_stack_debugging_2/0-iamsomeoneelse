@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # This script runs the whoami command as the user passed as an argument.
-# Check if exactly one argument is provided
-# Run whoami as the specified user
 if [ "$#" -ne 1 ]; then
     echo "Usage: $0 <username>"
     exit 1
