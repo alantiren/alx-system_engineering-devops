@@ -12,7 +12,7 @@ def get_employee_todo_progress(employee_id):
     user_url = f"{base_url}users/{employee_id}"
     user_response = requests.get(user_url)
     user_data = user_response.json()
-    employee_name = user_data.get("name")
+    employeename = user_data.get("name")
 
     todos_url = f"{base_url}todos"
     todos_params = {"userId": employee_id}
@@ -20,11 +20,11 @@ def get_employee_todo_progress(employee_id):
     todos_data = todos_response.json()
 
     completed_tasks = [task for task in todos_data if task["completed"]]
-    num_completed_tasks = len(completed_tasks)
-    total_tasks = len(todos_data)
+    numcompleted_tasks = len(completed_tasks)
+    totaltasks = len(todos_data)
 
     print("Employee {} is done with tasks({}/{}):".
-          format(employee_name, num_completed_tasks, total_tasks, len(json_req)))
+          format(employeename, numcompleted_tasks, totaltasks, len(json_req)))
 
     for task in completed_tasks:
         print(f"\t{task['title']}")
