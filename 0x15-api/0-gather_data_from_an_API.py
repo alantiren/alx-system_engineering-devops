@@ -24,7 +24,7 @@ def get_employee_todo_progress(employee_id):
     totaltasks = len(todos_data)
 
     print("Employee {} is done with tasks({}/{}):".
-          format(employeename, numcompleted_tasks, totaltasks, len(json_req)))
+          format(employeename, numcompleted_tasks, totaltasks))
 
     for task in completed_tasks:
         print(f"\t{task['title']}")
