@@ -7,30 +7,28 @@ import sys
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 gather_data_from_an_API.py <employee_id>")
-        sys.exit(1)
 
-    employee_id = sys.argv[1]
+    sessionReq = requests.Session()
 
+    employee_id = argv[1]
     base_url = "https://jsonplaceholder.typicode.com/"
+    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(employee_id)
+    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(employee_id)
 
-    user_url = f"{base_url}users/{employee_id}"
-    user_response = requests.get(user_url)
-    user_data = user_response.json()
-    employeename = user_data.get("name")
+    employee = sessionReq.get(idURL)
+    employeeName = sessionReq.get(nameURL)
 
-    todos_url = f"{base_url}todos"
-    todos_params = {"userId": employee_id}
-    todos_response = requests.get(todos_url, params=todos_params)
-    todos_data = todos_response.json()
+    json_req = employee.json()
+    employeename = employeeName.json()['name']
 
-    completed_tasks = [task for task in todos_data if task["completed"]]
-    numcompleted_tasks = len(completed_tasks)
-    totaltasks = len(todos_data)
+    total_tasks = 0
+
+    for done_tasks in json_req:
+        if done_tasks['completed']:
+            total_tasks += 1
 
     print("Employee {} is done with tasks({}/{}):".
-          format(employeename, numcompleted_tasks, totaltasks))
+          format(employeename, total_tasks,len(json_req)))
 
     for task in completed_tasks:
         print(f"\t{task['title']}")
