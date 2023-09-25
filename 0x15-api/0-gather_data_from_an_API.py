@@ -10,10 +10,10 @@ if __name__ == "__main__":
 
     sessionReq = requests.Session()
 
-    employee_id = argv[1]
+    e_id = argv[1]
     base_url = "https://jsonplaceholder.typicode.com/"
-    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(employee_id)
-    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(employee_id)
+    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(e_id)
+    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(e_id)
 
     employee = sessionReq.get(idURL)
     employeeName = sessionReq.get(nameURL)
@@ -28,7 +28,8 @@ if __name__ == "__main__":
             total_tasks += 1
 
     print("Employee {} is done with tasks({}/{}):".
-          format(employeename, total_tasks,len(json_req)))
+          format(employeename, total_tasks, len(json_req)))
 
-    for task in completed_tasks:
-        print(f"\t{task['title']}")
+    for done_tasks in json_req:
+        if done_tasks['completed']:
+            print("\t " + done_tasks.get('title'))
