@@ -17,7 +17,8 @@ def count_words(subreddit, word_list, results=None, after=None):
         subreddit (str): The name of the subreddit to query.
         word_list (list): A list of keywords to count.
         results (dict): A dictionary to store the keyword counts
-        after (str): The "after" parameter to paginate through results
+        (initially empty).after (str): The "after" parameter to paginate
+        through results(initially None).
 
     Returns:
         None
@@ -25,7 +26,9 @@ def count_words(subreddit, word_list, results=None, after=None):
     if results is None:
         results = {}
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}"
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
+    if after is not None:
+        url += f"&after={after}"
 
     headers = {
         "User-Agent": "MyRedditBot/1.0 (by YourUsername)"
@@ -35,11 +38,11 @@ def count_words(subreddit, word_list, results=None, after=None):
 
     if response.status_code == 200:
         data = response.json()
+
         posts = data["data"]["children"]
         for post in posts:
             title = post["data"]["title"]
             words = title.split()
-
             for word in words:
                 word = word.lower()
                 word = word.strip('.,!?()[]{}"\'')
@@ -48,7 +51,6 @@ def count_words(subreddit, word_list, results=None, after=None):
                         results[word] += 1
                     else:
                         results[word] = 1
-
         after = data["data"]["after"]
         if after is not None:
             return count_words(subreddit, word_list, results, after)
@@ -56,7 +58,6 @@ def count_words(subreddit, word_list, results=None, after=None):
             print_results(results)
     else:
         pass
-
 
 def print_results(results):
     """
