@@ -10,13 +10,15 @@ import requests
 
 def number_of_subscribers(subreddit):
     """
-    Queries the Reddit API and returns the number of subscribers for a given subreddit.
+    Queries the Reddit API and returns the number of subscribers
+    for a given subreddit.
 
     Args:
         subreddit (str): The name of the subreddit to query.
 
     Returns:
-        int: The number of subscribers for the subreddit, or 0 if the subreddit is invalid.
+        int: The number of subscribers for the subreddit, or 0 if
+        the subreddit is invalid.
     """
     req = requests.get(
         "https://www.reddit.com/r/{}/about.json".format(subreddit),

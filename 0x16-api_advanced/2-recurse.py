@@ -22,14 +22,11 @@ def recurse(subreddit, hot_list=[], after=None):
         list: A list containing the titles of all hot articles,
         or None if no results are found.
     """
-
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}"
-
-    headers = {
-        "User-Agent": "MyRedditBot/1.0 (by YourUsername)"
-    }
-
-    response = requests.get(url, headers=headers)
+    req = requests.get(
+        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        headers={"User-Agent": "Custom"},
+        params={"after": after},
+    )
 
     if response.status_code == 200:
         data = response.json()

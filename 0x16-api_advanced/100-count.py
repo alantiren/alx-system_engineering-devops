@@ -22,16 +22,12 @@ def count_words(subreddit, word_list, results=None, after=None):
     Returns:
         None
     """
-    if results is None:
-        results = {}
+    headers = {'User-Agent': 'HolbertonSchool'}
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}"
-
-    headers = {
-        "User-Agent": "MyRedditBot/1.0 (by YourUsername)"
-    }
+    word_list = [word.lower() for word in word_list]
 
     response = requests.get(url, headers=headers)
+
     if response.status_code == 200:
         data = response.json()
         posts = data["data"]["children"]
