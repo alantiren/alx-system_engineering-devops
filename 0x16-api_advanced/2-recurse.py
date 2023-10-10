@@ -25,7 +25,6 @@ def recurse(subreddit, hot_list=[], after=None):
     url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}".format(
     subreddit, after
 )
-
     headers = {
         "User-Agent": "MyRedditBot/1.0 (by YourUsername)"
     }
