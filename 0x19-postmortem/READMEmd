@@ -1,0 +1,20 @@
+Issue Summary
+- Duration: October 17, 2023, 2:00 AM - October 17, 2023, 4:00 AM (UTC)
+- Impact: The chat application experienced an outage for 2 hours, affecting all users. Approximately 100% of users were unable to send or receive messages.
+- Root Cause: The outage was caused by a rogue squirrel chewing through a critical fiber optic cable.
+Timeline
+- 2:00 AM: The issue was detected when monitoring alerts indicated a sudden drop in server connectivity.
+- 2:05 AM: Engineers noticed that the server room was plunged into darkness. An engineer screamed, "Squirrel attack!"
+- 2:10 AM: Actions were taken to investigate the issue, including checking power sources and server logs.
+- 2:30 AM: An assumption was made that a power outage caused the problem. Emergency generators were started.
+- 2:45 AM: Engineers realized there were no signs of power disruption, but a squirrel was spotted fleeing the server room.
+- 3:00 AM: The incident was escalated to the "Rogue Animal Response Team" (RART).
+- 4:00 AM: The squirrel was safely removed from the server room, and the cables were repaired.
+Root Cause and Resolution
+- The root cause of the issue was a rogue squirrel that chewed through a critical fiber optic cable, disrupting network connectivity.
+- The issue was fixed by repairing the damaged cable and ensuring that the server room was squirrel-proofed.
+Corrective and Preventative Measures
+- Improvements: Enhance physical security to prevent unauthorized animal access.
+- Tasks to Address the Issue:
+ 1. Implement squirrel-proof barriers around critical infrastructure.
+ 2. Conduct regular checks for rogue animals in the server room.
